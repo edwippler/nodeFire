@@ -1,1 +1,1 @@
-module.exports = 'mongodb://localhost:27017/sigma';
+module.exports = 'mongodb://localhost:27017/phi';
