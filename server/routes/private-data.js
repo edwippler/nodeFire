@@ -49,7 +49,7 @@ router.post("/", function(req, res){
         res.sendStatus(403);
       } else {
         // Based on the clearance level of the individual, give them access to different information
-        Secret.create({ secretText: secret.secretText, secrecyLevel: secret.secretLevel}, function (err, secrets){
+        Secret.create({ secretText: secret.secretText, secrecyLevel: secret.level}, function (err, secrets){
           if (err) {
             console.log('Error COMPLETING secrecyLevel query task', err);
             res.sendStatus(500);
