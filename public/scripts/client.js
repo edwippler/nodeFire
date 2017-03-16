@@ -22,6 +22,7 @@ app.controller("SampleCtrl", function($firebaseAuth, $http) {
     if(firebaseUser) {
       // This is where we make our call to our server
       firebaseUser.getToken().then(function(idToken){
+        self.getSecrets = function(idToken){
         $http({
           method: 'GET',
           url: '/privateData',
@@ -30,7 +31,11 @@ app.controller("SampleCtrl", function($firebaseAuth, $http) {
           }
         }).then(function(response){
           self.secretData = response.data;
+          console.log('it works!yay');
+
         });
+      };
+        self.getSecrets(idToken);
       });
     } else {
       console.log('Not logged in or not authorized.');
@@ -40,8 +45,28 @@ app.controller("SampleCtrl", function($firebaseAuth, $http) {
   });
 
   //post user
-  self.confide = function(){
-    console.log(self.newSecret);
+  self.confide = function(secret){
+    console.log(secret);
+    auth.$onAuthStateChanged(function(firebaseUser){
+      // firebaseUser will be null if not logged in
+      if(firebaseUser) {
+        // This is where we make our call to our server
+        firebaseUser.getToken().then(function(idToken){
+          $http({
+            method: 'POST',
+            url: '/privateData',
+            data: secret,
+            headers: {
+              id_token: idToken
+            }
+          }).then(function(response){
+            console.log(response);
+            self.getSecrets(idToken);
+          });
+        });
+      }
+    });
+    self.newSecret = {};
   }
 
   // This code runs when the user logs out
