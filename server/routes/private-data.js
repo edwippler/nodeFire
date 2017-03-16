@@ -25,6 +25,7 @@ router.get("/", function(req, res){
           } else {
             // return all of the results where a specific user has permission
             res.send(secrets);
+            console.log(secrets);
           }
         });
       }

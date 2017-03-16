@@ -3,8 +3,8 @@ app.controller("SampleCtrl", function($firebaseAuth, $http) {
   var auth = $firebaseAuth();
   var self = this;
   self.newSecret = {};
-  self.secrecyLevelArray = {level: [1, 2, 3, 4, 5]};
-
+  self.secrecyLevelArray = {level: []};
+// 1, 2, 3, 4, 5
 
   // This code runs whenever the user logs in
   self.logIn = function(){
@@ -34,7 +34,25 @@ app.controller("SampleCtrl", function($firebaseAuth, $http) {
         }).then(function(response){
           self.secretData = response.data;
           console.log('it works!yay');
+          console.log(self.secretData);
+          self.clearanceLevelToDOM = function() {
 
+                if(self.secrecyLevelArray.level.indexOf(self.secretData) == -1) {
+                  self.secrecyLevelArray.level.push(self.secretData);
+                }
+
+              else {
+                console.log('duupe');
+              }
+              console.log(self.secrecyLevelArray.level);
+              console.log(self.secrecyLevelArray);
+
+            // for looo >> if user clearance level is equal to or less than secrecyLevel then
+            // for (var i = 1; i <= user.clearanceLevel; i++) {
+            //   self.secrecyLevelArray.level.push(i);
+            // }
+          }
+          self.clearanceLevelToDOM();
         });
       };
         self.getSecrets(idToken);
@@ -45,6 +63,10 @@ app.controller("SampleCtrl", function($firebaseAuth, $http) {
     }
 
   });
+
+
+
+
 
   //post user
   self.confide = function(secret){
