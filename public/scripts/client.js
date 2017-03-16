@@ -3,6 +3,9 @@ app.controller("SampleCtrl", function($firebaseAuth, $http) {
   var auth = $firebaseAuth();
   var self = this;
   self.newSecret = {};
+  // self.secrecyLevelArray = [{level: 1}, {level: 2}, {level: 3}, {level: 4}, {level: 5}];
+  self.secrecyLevelArray = {level: [1, 2, 3, 4, 5]};
+
 
   // This code runs whenever the user logs in
   self.logIn = function(){

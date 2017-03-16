@@ -24,6 +24,13 @@
     <button ng-click="sc.logOut()">Log Out</button>
     <div ng-if="sc.secretData.length === 0">Log in to get some secret data.</div>
     <div ng-if="sc.secretData.length > 0"><label for="newSecret">Share a secret...</label><input type="text" name="newSecret" ng-model="sc.newSecret.secretText">
+      {{sc.secrecyLevelArray[0]}}
+    <select ng-model="sc.newSecret.secretLevel" ng-options="item.level as item for item in sc.secrecyLevelArray.level">
+      <!-- <option ng-repeat="secret in sc.secrecyLevelArray.level" value="{{secret.level}}">
+        {{secret.level}}
+      </option> -->
+    </select>
+    {{sc.newSecret}}
     <button type="button" name="button" ng-click="sc.confide(sc.newSecret)">Confide</button>
     <table>
       <thead>
